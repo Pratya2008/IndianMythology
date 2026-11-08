@@ -1,0 +1,572 @@
+/* ==============================================================
+   SANATAN KATHA — 3D Indian Mythology Website
+   ============================================================== */
+
+:root {
+    --saffron: #ff6b00;
+    --gold: #ffd700;
+    --deep-blue: #050a1a;
+    --navy: #0a1628;
+    --card-bg: rgba(12, 18, 40, 0.85);
+    --card-border: rgba(255, 215, 0, 0.12);
+    --card-hover: rgba(20, 30, 65, 0.95);
+    --text-light: #e8e8f0;
+    --text-muted: #7a7a9a;
+    --cream: #fef9ef;
+    --font-display: 'Cinzel Decorative', serif;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lora', serif;
+}
+
+/* === RESET === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-body);
+    background: var(--deep-blue);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* === THREE.JS CANVAS === */
+#three-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* === CURSOR GLOW === */
+#cursor-glow {
+    position: fixed;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,0,0.07) 0%, rgba(255,215,0,0.03) 30%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+}
+
+/* === CONTAINER === */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* === SECTIONS === */
+.scene-section {
+    position: relative;
+    z-index: 2;
+    padding: 8rem 0;
+    perspective: 1200px;
+}
+
+/* === NAVBAR === */
+#navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 0;
+    transition: all 0.4s ease;
+}
+#navbar.scrolled {
+    background: rgba(5, 10, 26, 0.92);
+    backdrop-filter: blur(25px);
+    padding: 0.6rem 0;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); text-decoration: none; letter-spacing: 1px; }
+.nav-links { display: flex; list-style: none; gap: 0.3rem; }
+.nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-family: var(--font-heading); font-size: 0.75rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.5rem 0.7rem; border-radius: 6px;
+    transition: all 0.3s; cursor: none;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); background: rgba(255,215,0,0.08); }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: none; padding: 5px; }
+.nav-toggle span { width: 25px; height: 2px; background: var(--gold); transition: all 0.3s; }
+
+/* === LABELS / HEADINGS === */
+.label {
+    font-family: var(--font-heading); font-size: 0.8rem;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+}
+.heading-3d {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: white; margin-bottom: 1rem; line-height: 1.3;
+}
+.desc { font-size: 1.05rem; color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header .desc { margin: 0 auto 3rem; }
+
+/* ================================================================
+   HERO
+   ================================================================ */
+#hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 0;
+}
+.hero-content { position: relative; z-index: 2; padding: 2rem; }
+
+/* 3D Mandala */
+.mandala-3d {
+    width: 160px; height: 160px; margin: 0 auto 2.5rem;
+    position: relative; transform-style: preserve-3d;
+}
+.mandala-ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(255,215,0,0.2);
+}
+.r1 { animation: spin3d-1 12s linear infinite; }
+.r2 { inset: 15px; border-color: rgba(255,107,0,0.25); animation: spin3d-2 18s linear infinite; }
+.r3 { inset: 30px; border-color: rgba(255,215,0,0.15); animation: spin3d-3 24s linear infinite; }
+.mandala-core {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.5));
+}
+@keyframes spin3d-1 { to { transform: rotateX(360deg) rotateY(180deg); } }
+@keyframes spin3d-2 { to { transform: rotateY(360deg) rotateZ(180deg); } }
+@keyframes spin3d-3 { to { transform: rotateZ(360deg) rotateX(180deg); } }
+
+.hero-sanskrit {
+    font-size: 1.2rem; color: var(--gold); letter-spacing: 3px;
+    opacity: 0.7; margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(255,215,0,0.3);
+}
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    color: white; margin-bottom: 1.5rem; line-height: 1.1;
+    text-shadow: 0 0 80px rgba(255,107,0,0.3), 0 0 160px rgba(255,107,0,0.1);
+}
+.hero-subtitle {
+    font-size: 1.15rem; color: rgba(255,255,255,0.5);
+    max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.8;
+}
+.cta-btn {
+    display: inline-block; padding: 1rem 2.5rem;
+    border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; font-family: var(--font-heading);
+    font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+    border-radius: 50px; transition: all 0.4s ease;
+    cursor: none; position: relative; overflow: hidden;
+}
+.cta-btn:hover {
+    background: var(--gold); color: var(--deep-blue);
+    box-shadow: 0 0 40px rgba(255,215,0,0.3), 0 0 80px rgba(255,215,0,0.1);
+    transform: translateY(-2px);
+}
+.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); }
+.scroll-arrow {
+    width: 22px; height: 22px;
+    border-right: 2px solid rgba(255,215,0,0.4);
+    border-bottom: 2px solid rgba(255,215,0,0.4);
+    transform: rotate(45deg); animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%,20%,50%,80%,100% { transform: rotate(45deg) translateY(0); }
+    40% { transform: rotate(45deg) translateY(10px); }
+    60% { transform: rotate(45deg) translateY(5px); }
+}
+
+/* ================================================================
+   INTRO
+   ================================================================ */
+.intro-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+.intro-text p { color: rgba(255,255,255,0.6); margin-bottom: 1.2rem; font-size: 1.02rem; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.stat-card-3d {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 2rem 1.5rem; text-align: center;
+    transition: all 0.4s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.stat-card-3d:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 40px rgba(255,215,0,0.1), 0 0 60px rgba(255,215,0,0.05);
+}
+.stat-n { font-family: var(--font-display); font-size: 2.8rem; font-weight: 900; color: var(--saffron); display: block; }
+.stat-s { font-family: var(--font-heading); font-size: 0.9rem; color: var(--saffron); }
+.stat-l { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+/* ================================================================
+   TRIMURTI — DEITY CARDS
+   ================================================================ */
+.trimurti-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.deity-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem 2rem; text-align: center;
+    position: relative; overflow: hidden;
+    transition: all 0.5s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.deity-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0; transition: opacity 0.5s;
+}
+.deity-card:hover { border-color: rgba(255,215,0,0.3); }
+.deity-card:hover::before { opacity: 1; }
+.deity-card.featured {
+    border-color: rgba(255,215,0,0.25);
+    background: linear-gradient(180deg, rgba(255,215,0,0.04), var(--card-bg));
+}
+
+/* Deity glow */
+.dc-glow {
+    position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--gc); opacity: 0.06; filter: blur(60px);
+    transition: all 0.5s;
+}
+.deity-card:hover .dc-glow { opacity: 0.12; transform: translateX(-50%) scale(1.3); }
+
+/* Deity image */
+.dc-img {
+    width: 180px; height: 180px; margin: 0 auto 1.5rem;
+    border-radius: 50%; overflow: hidden; position: relative;
+    border: 3px solid rgba(255,215,0,0.2);
+    box-shadow: 0 0 30px rgba(255,215,0,0.1), inset 0 0 30px rgba(0,0,0,0.4);
+    transition: all 0.5s ease;
+}
+.dc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.dc-img-ring {
+    position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid rgba(255,215,0,0.15);
+    animation: ring-pulse 3s ease-in-out infinite;
+}
+@keyframes ring-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+.deity-card:hover .dc-img {
+    border-color: var(--gold);
+    box-shadow: 0 0 50px rgba(255,215,0,0.2), 0 0 100px rgba(255,215,0,0.08);
+    transform: translateZ(20px) scale(1.03);
+}
+.deity-card:hover .dc-img img { transform: scale(1.1); }
+
+.dc-role {
+    font-family: var(--font-heading); font-size: 0.7rem;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+}
+.dc-name { font-family: var(--font-display); font-size: 1.8rem; color: white; margin: 0.3rem 0; }
+.dc-sans { font-size: 1.1rem; color: rgba(255,215,0,0.5); display: block; margin-bottom: 1rem; }
+.dc-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1.5rem; }
+.dc-details {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+    padding-top: 1.5rem; border-top: 1px solid var(--card-border); text-align: left;
+}
+.dc-details span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; }
+.dc-details strong { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+
+/* ================================================================
+   DASHAVATAR
+   ================================================================ */
+.avatar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+.avatar-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 1.8rem 1.2rem; text-align: center;
+    position: relative; overflow: hidden;
+    transition: all 0.4s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.avatar-card:hover {
+    border-color: var(--saffron);
+    box-shadow: 0 10px 40px rgba(255,107,0,0.15);
+    transform: translateY(-8px);
+}
+.av-num {
+    position: absolute; top: 0.6rem; right: 0.8rem;
+    font-family: var(--font-display); font-size: 0.75rem;
+    color: var(--saffron); opacity: 0.6;
+}
+.av-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.avatar-card h5 { font-family: var(--font-heading); font-size: 1rem; color: white; margin-bottom: 0.3rem; }
+.avatar-card span {
+    font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--saffron); font-family: var(--font-heading);
+}
+.avatar-card p { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 0.6rem; line-height: 1.6; }
+
+/* ================================================================
+   GODDESSES
+   ================================================================ */
+.goddess-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.goddess-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem 1.8rem; text-align: center;
+    position: relative; overflow: hidden;
+    transition: all 0.5s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.goddess-card:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-5px); }
+
+/* Goddess image */
+.gc-img {
+    width: 150px; height: 150px; margin: 0 auto 1.5rem;
+    border-radius: 50%; overflow: hidden; position: relative;
+}
+.gc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.gc-ring {
+    position: absolute; inset: -3px; border-radius: 50%;
+    border: 2px solid var(--rc); opacity: 0.5;
+    transition: all 0.5s; box-shadow: 0 0 20px var(--rc);
+}
+.goddess-card:hover .gc-ring { opacity: 1; box-shadow: 0 0 35px var(--rc); transform: scale(1.04); }
+.goddess-card:hover .gc-img img { transform: scale(1.1); }
+
+.goddess-card h4 { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold); margin-bottom: 0.3rem; }
+.gc-title {
+    font-family: var(--font-heading); font-size: 0.7rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); display: block; margin-bottom: 1rem;
+}
+.goddess-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+/* ================================================================
+   EPICS
+   ================================================================ */
+.epics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.epic-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem; position: relative; overflow: hidden;
+    transition: all 0.5s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.epic-card:hover { border-color: rgba(255,215,0,0.3); }
+.ec-glow {
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--eg); opacity: 0.04; filter: blur(40px);
+    transition: all 0.5s;
+}
+.epic-card:hover .ec-glow { opacity: 0.08; }
+.ec-badges { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.ec-badges span {
+    padding: 0.25rem 0.8rem; border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 50px; font-size: 0.68rem; letter-spacing: 1px;
+    color: var(--gold); font-family: var(--font-heading);
+}
+.epic-card h4 { font-family: var(--font-display); font-size: 1.6rem; color: white; margin-bottom: 0.8rem; }
+.ec-quote { font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.ec-chapters { display: flex; flex-direction: column; gap: 0.3rem; }
+.ch {
+    display: flex; gap: 1rem; padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04); align-items: flex-start;
+    font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6;
+}
+.ch:last-child { border-bottom: none; }
+.ch-n {
+    min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--saffron), #e65100);
+    color: white; border-radius: 8px; font-family: var(--font-heading);
+    font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+}
+
+/* ================================================================
+   CREATURES
+   ================================================================ */
+.creature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.creature-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 2rem 1.2rem; text-align: center;
+    transition: all 0.4s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.creature-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 40px rgba(255,215,0,0.1);
+    transform: translateY(-5px) scale(1.02);
+}
+.cr-e { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.creature-card h5 { font-family: var(--font-heading); font-size: 1rem; color: var(--gold); margin-bottom: 0.6rem; }
+.creature-card p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+/* ================================================================
+   COSMOLOGY
+   ================================================================ */
+.cosmo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.cosmo-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem;
+    transition: all 0.4s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.cosmo-card.wide { grid-column: 1 / -1; }
+.cosmo-card:hover { border-color: rgba(255,215,0,0.25); }
+.cosmo-card h4 { font-family: var(--font-heading); font-size: 1.2rem; color: white; margin-bottom: 1.5rem; }
+
+/* Yugas */
+.yuga-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.yuga-row { position: relative; padding: 0.8rem 1rem; border-radius: 8px; overflow: hidden; }
+.yuga-bar {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: var(--yc); opacity: 0.08; border-radius: 8px;
+    transition: opacity 0.4s;
+}
+.yuga-row:hover .yuga-bar { opacity: 0.15; }
+.yuga-name { font-family: var(--font-heading); font-size: 0.9rem; color: var(--text-light); position: relative; }
+.yuga-info { display: block; font-size: 0.78rem; color: var(--text-muted); position: relative; margin-top: 0.2rem; }
+
+/* Lokas */
+.loka-stack { display: flex; flex-direction: column; gap: 0.25rem; }
+.loka-item {
+    padding: 0.4rem 1rem; font-size: 0.8rem;
+    border-left: 2px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5); transition: all 0.3s;
+}
+.loka-item:hover { padding-left: 1.5rem; color: var(--text-light); border-left-color: var(--saffron); }
+.loka-item.up { border-left-color: rgba(255,215,0,0.2); }
+.loka-item.here {
+    background: rgba(255,107,0,0.1); border-left-color: var(--saffron);
+    color: var(--saffron); font-weight: 600; border-radius: 0 8px 8px 0;
+    padding: 0.6rem 1rem;
+}
+.loka-item.down { border-left-color: rgba(100,100,150,0.2); }
+
+/* Time flow */
+.time-flow { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.tf-node {
+    text-align: center; padding: 1.5rem 1.2rem;
+    background: rgba(255,107,0,0.04); border: 1px solid rgba(255,107,0,0.1);
+    border-radius: 12px; flex: 1; min-width: 140px;
+    transition: all 0.3s;
+}
+.tf-node:hover { border-color: var(--saffron); background: rgba(255,107,0,0.08); }
+.tf-v { font-family: var(--font-display); font-size: 1.2rem; color: var(--saffron); display: block; }
+.tf-n { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; display: block; margin: 0.3rem 0; }
+.tf-d { font-size: 0.7rem; color: var(--text-muted); }
+.tf-arrow { font-size: 1.5rem; color: var(--saffron); }
+
+/* ================================================================
+   SACRED TEXTS
+   ================================================================ */
+.texts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.text-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 2rem;
+    transition: all 0.4s ease; transform-style: preserve-3d;
+    backdrop-filter: blur(10px);
+}
+.text-card:hover { border-color: rgba(255,215,0,0.25); transform: translateY(-3px); }
+.tc-badge {
+    display: inline-block; padding: 0.25rem 0.8rem;
+    border-radius: 50px; font-size: 0.65rem; letter-spacing: 1px;
+    text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 1rem;
+}
+.tc-badge.shruti { background: rgba(255,215,0,0.1); color: var(--gold); }
+.tc-badge.smriti { background: rgba(255,107,0,0.1); color: var(--saffron); }
+.text-card h4 { font-family: var(--font-display); font-size: 1.4rem; color: white; margin-bottom: 0.8rem; }
+.text-card p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 0.5rem; }
+.text-card ul { list-style: none; margin-top: 0.5rem; }
+.text-card li {
+    padding: 0.3rem 0; font-size: 0.85rem; color: rgba(255,255,255,0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.text-card li:last-child { border-bottom: none; }
+.text-card blockquote {
+    margin-top: 1rem; padding: 1rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(255,215,0,0.04); border-radius: 0 8px 8px 0;
+    font-style: italic; color: rgba(255,255,255,0.6); font-size: 0.88rem;
+}
+
+/* ================================================================
+   QUOTE SECTION
+   ================================================================ */
+.quote-sec { padding: 6rem 0; }
+.quote-3d {
+    text-align: center; padding: 4rem 3rem;
+    background: linear-gradient(135deg, rgba(128,0,32,0.2), rgba(10,22,40,0.8));
+    border: 1px solid rgba(255,215,0,0.1); border-radius: 24px;
+    position: relative; overflow: hidden; transform-style: preserve-3d;
+}
+.q-mark {
+    font-size: 12rem; font-family: serif;
+    color: rgba(255,215,0,0.04); position: absolute;
+    top: -2rem; left: 50%; transform: translateX(-50%); line-height: 1;
+}
+.quote-3d p {
+    font-size: 1.3rem; font-style: italic;
+    color: rgba(255,255,255,0.75); max-width: 750px;
+    margin: 0 auto 1.5rem; line-height: 1.8; position: relative;
+}
+.quote-3d cite {
+    font-style: normal; font-family: var(--font-heading);
+    font-size: 0.8rem; letter-spacing: 2px; color: var(--gold); position: relative;
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+#footer { background: rgba(2,4,10,0.95); padding: 4rem 0 0; position: relative; z-index: 2; }
+.footer-row { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.footer-brand h4 { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); margin-bottom: 0.8rem; }
+.footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+.footer-links { display: flex; flex-direction: column; gap: 0.4rem; }
+.footer-links h5 { font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: all 0.3s; cursor: none; }
+.footer-links a:hover { color: var(--gold); padding-left: 0.5rem; }
+.footer-bottom { text-align: center; padding: 2rem 0; }
+.footer-bottom p { color: rgba(255,215,0,0.4); font-size: 1rem; }
+.ft-sub { font-size: 0.75rem; font-style: italic; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
+
+/* ================================================================
+   3D TILT EFFECT BASE (JS-driven)
+   ================================================================ */
+[data-tilt] { transform-style: preserve-3d; transition: transform 0.15s ease-out; }
+
+/* ================================================================
+   REVEAL ANIMATIONS
+   ================================================================ */
+.reveal-3d, .deity-card, .avatar-card, .goddess-card, .creature-card,
+.epic-card, .cosmo-card, .text-card, .stat-card-3d, .quote-3d {
+    opacity: 0; transform: translateY(60px) rotateX(5deg);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.revealed {
+    opacity: 1 !important; transform: translateY(0) rotateX(0deg) !important;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 1024px) {
+    .trimurti-row, .goddess-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .avatar-grid { grid-template-columns: repeat(2, 1fr); }
+    .creature-grid { grid-template-columns: repeat(2, 1fr); }
+    .epics-row, .cosmo-grid, .texts-grid { grid-template-columns: 1fr; }
+    .intro-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    #cursor-glow { display: none; }
+    .scene-section { padding: 5rem 0; }
+    .nav-links {
+        position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+        background: rgba(5,10,26,0.98); flex-direction: column;
+        padding: 5rem 2rem 2rem; transition: right 0.4s;
+    }
+    .nav-links.open { right: 0; }
+    .nav-toggle { display: flex; z-index: 101; cursor: pointer; }
+    .avatar-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+    .creature-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+    .heading-3d { font-size: 1.6rem; }
+    .time-flow { flex-direction: column; }
+    .tf-arrow { transform: rotate(90deg); }
+    .ec-chapters .ch { flex-direction: column; gap: 0.5rem; }
+    .quote-3d { padding: 2.5rem 1.5rem; }
+    .quote-3d p { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+    .container { padding: 0 1rem; }
+    .stats-grid { grid-template-columns: 1fr; }
+}

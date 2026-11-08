@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanatan Katha — Indian Mythology | 3D Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Three.js 3D Background Canvas -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Custom cursor glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">🕉 Sanatan Katha</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#trimurti">Trimurti</a></li>
+                <li><a href="#goddesses">Goddesses</a></li>
+                <li><a href="#epics">Epics</a></li>
+                <li><a href="#cosmology">Cosmology</a></li>
+                <li><a href="#texts">Sacred Texts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <header id="hero" class="scene-section">
+        <div class="hero-content">
+            <div class="mandala-3d">
+                <div class="mandala-ring r1"></div>
+                <div class="mandala-ring r2"></div>
+                <div class="mandala-ring r3"></div>
+                <div class="mandala-core">🕉</div>
+            </div>
+            <p class="hero-sanskrit">॥ ॐ असतो मा सद्गमय ॥</p>
+            <h1 class="hero-title">Indian Mythology</h1>
+            <p class="hero-subtitle">An immersive 3D journey through the timeless stories, divine beings,<br>and cosmic wisdom of ancient India</p>
+            <a href="#trimurti" class="cta-btn">Enter the Cosmos ↓</a>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-arrow"></div>
+        </div>
+    </header>
+
+    <!-- ===================== INTRO ===================== -->
+    <section id="intro" class="scene-section">
+        <div class="container">
+            <div class="intro-layout">
+                <div class="intro-text reveal-3d">
+                    <h2 class="label">The Eternal Stories</h2>
+                    <h3 class="heading-3d">A Civilization's Living Memory</h3>
+                    <p>Indian mythology is one of the richest and most complex mythological traditions in the world, spanning over <strong>5,000 years</strong> of continuous storytelling. Unlike myths of civilizations that have faded, these stories remain a living, breathing part of daily life for over a billion people.</p>
+                    <p>From the cosmic dance of Shiva that creates and destroys universes, to the tender love story of Rama and Sita, from philosophical dialogues on the battlefield of Kurukshetra to the playful exploits of Krishna — these narratives explore the deepest questions of existence.</p>
+                </div>
+                <div class="stats-grid reveal-3d">
+                    <div class="stat-card-3d" data-tilt>
+                        <span class="stat-n" data-target="33">0</span>
+                        <span class="stat-s">Crore</span>
+                        <span class="stat-l">Deities in the Pantheon</span>
+                    </div>
+                    <div class="stat-card-3d" data-tilt>
+                        <span class="stat-n" data-target="18">0</span>
+                        <span class="stat-s"></span>
+                        <span class="stat-l">Major Puranas</span>
+                    </div>
+                    <div class="stat-card-3d" data-tilt>
+                        <span class="stat-n" data-target="10">0</span>
+                        <span class="stat-s"></span>
+                        <span class="stat-l">Avatars of Vishnu</span>
+                    </div>
+                    <div class="stat-card-3d" data-tilt>
+                        <span class="stat-n" data-target="14">0</span>
+                        <span class="stat-s"></span>
+                        <span class="stat-l">Lokas (Realms)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TRIMURTI ===================== -->
+    <section id="trimurti" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">The Supreme Trinity</h2>
+                <h3 class="heading-3d">The Trimūrti</h3>
+                <p class="desc">The three supreme gods who govern the cosmic cycle of creation, preservation, and destruction.</p>
+            </div>
+
+            <div class="trimurti-row">
+                <!-- Brahma -->
+                <div class="deity-card" data-tilt>
+                    <div class="dc-glow" style="--gc:#ffd700"></div>
+                    <div class="dc-img">
+                        <img src="images/brahma.jpg" alt="Lord Brahma — The Creator">
+                        <div class="dc-img-ring"></div>
+                    </div>
+                    <span class="dc-role">The Creator</span>
+                    <h4 class="dc-name">Brahmā</h4>
+                    <span class="dc-sans">ब्रह्मा</span>
+                    <p class="dc-desc">Born from a golden lotus emerging from Lord Vishnu's navel, Brahma is the creator of the universe and all living beings. With four heads facing the four directions, he speaks the four Vedas. His consort is Saraswati, goddess of knowledge.</p>
+                    <div class="dc-details">
+                        <div><span>Vehicle</span><strong>Hamsa (Swan)</strong></div>
+                        <div><span>Weapon</span><strong>Brahmastra</strong></div>
+                        <div><span>Abode</span><strong>Satyaloka</strong></div>
+                        <div><span>Consort</span><strong>Saraswati</strong></div>
+                    </div>
+                </div>
+
+                <!-- Vishnu -->
+                <div class="deity-card featured" data-tilt>
+                    <div class="dc-glow" style="--gc:#4a90d9"></div>
+                    <div class="dc-img">
+                        <img src="images/vishnu.jpg" alt="Lord Vishnu — The Preserver">
+                        <div class="dc-img-ring"></div>
+                    </div>
+                    <span class="dc-role">The Preserver</span>
+                    <h4 class="dc-name">Vishnu</h4>
+                    <span class="dc-sans">विष्णु</span>
+                    <p class="dc-desc">The all-pervading supreme being who preserves the universe and restores cosmic order. Reclining on the serpent Shesha in the cosmic ocean, Vishnu descends to Earth in various avatars whenever dharma is threatened. He has incarnated ten times.</p>
+                    <div class="dc-details">
+                        <div><span>Vehicle</span><strong>Garuda (Eagle)</strong></div>
+                        <div><span>Weapon</span><strong>Sudarshana Chakra</strong></div>
+                        <div><span>Abode</span><strong>Vaikuntha</strong></div>
+                        <div><span>Consort</span><strong>Lakshmi</strong></div>
+                    </div>
+                </div>
+
+                <!-- Shiva -->
+                <div class="deity-card" data-tilt>
+                    <div class="dc-glow" style="--gc:#9b59b6"></div>
+                    <div class="dc-img">
+                        <img src="images/shiva.jpg" alt="Lord Shiva — The Destroyer">
+                        <div class="dc-img-ring"></div>
+                    </div>
+                    <span class="dc-role">The Destroyer</span>
+                    <h4 class="dc-name">Shiva</h4>
+                    <span class="dc-sans">शिव</span>
+                    <p class="dc-desc">The auspicious one, the great ascetic and cosmic dancer. Shiva's Tandava dance creates and destroys worlds. Adorned with the crescent moon, the sacred Ganga flowing from his matted locks, and serpents coiled around his neck, he meditates atop Mount Kailash.</p>
+                    <div class="dc-details">
+                        <div><span>Vehicle</span><strong>Nandi (Bull)</strong></div>
+                        <div><span>Weapon</span><strong>Trishula (Trident)</strong></div>
+                        <div><span>Abode</span><strong>Mount Kailash</strong></div>
+                        <div><span>Consort</span><strong>Parvati</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== DASHAVATAR ===================== -->
+    <section id="dashavatar" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">The Ten Incarnations</h2>
+                <h3 class="heading-3d">Dashāvatāra of Vishnu</h3>
+                <p class="desc">Whenever righteousness declines, Lord Vishnu incarnates on Earth to restore cosmic balance.</p>
+            </div>
+            <div class="avatar-grid">
+                <div class="avatar-card" data-tilt style="--i:0"><div class="av-num">1</div><div class="av-emoji">🐟</div><h5>Matsya</h5><span>Satya Yuga</span><p>The great fish who saved Manu and the Vedas from a cosmic flood, guiding the boat through the deluge to safety.</p></div>
+                <div class="avatar-card" data-tilt style="--i:1"><div class="av-num">2</div><div class="av-emoji">🐢</div><h5>Kurma</h5><span>Satya Yuga</span><p>The cosmic tortoise who supported Mount Mandara on his back during the Samudra Manthan — the churning of the ocean of milk.</p></div>
+                <div class="avatar-card" data-tilt style="--i:2"><div class="av-num">3</div><div class="av-emoji">🐗</div><h5>Varaha</h5><span>Satya Yuga</span><p>The mighty boar who dove into the cosmic waters to rescue the Earth goddess Bhudevi from the demon Hiranyaksha.</p></div>
+                <div class="avatar-card" data-tilt style="--i:3"><div class="av-num">4</div><div class="av-emoji">🦁</div><h5>Narasimha</h5><span>Satya Yuga</span><p>The fierce half-man, half-lion who appeared from a pillar at twilight to slay the invincible demon Hiranyakashipu.</p></div>
+                <div class="avatar-card" data-tilt style="--i:4"><div class="av-num">5</div><div class="av-emoji">👤</div><h5>Vamana</h5><span>Treta Yuga</span><p>The dwarf Brahmin who asked demon king Bali for three steps of land, then grew to cosmic size covering heaven and earth.</p></div>
+                <div class="avatar-card" data-tilt style="--i:5"><div class="av-num">6</div><div class="av-emoji">🪓</div><h5>Parashurama</h5><span>Treta Yuga</span><p>The warrior sage who wielded an axe given by Shiva, ridding the earth of corrupt Kshatriya kings twenty-one times.</p></div>
+                <div class="avatar-card" data-tilt style="--i:6"><div class="av-num">7</div><div class="av-emoji">🏹</div><h5>Rama</h5><span>Treta Yuga</span><p>The ideal king of Ayodhya, embodiment of dharma. His epic journey to rescue Sita from Ravana forms the Ramayana.</p></div>
+                <div class="avatar-card" data-tilt style="--i:7"><div class="av-num">8</div><div class="av-emoji">🦚</div><h5>Krishna</h5><span>Dvapara Yuga</span><p>The divine statesman, cowherd, and philosopher who delivered the Bhagavad Gita and orchestrated the Mahabharata war.</p></div>
+                <div class="avatar-card" data-tilt style="--i:8"><div class="av-num">9</div><div class="av-emoji">🧘</div><h5>Buddha</h5><span>Kali Yuga</span><p>The enlightened one who taught the path of compassion, non-violence, and the middle way to end suffering.</p></div>
+                <div class="avatar-card" data-tilt style="--i:9"><div class="av-num">10</div><div class="av-emoji">🐴</div><h5>Kalki</h5><span>End of Kali Yuga</span><p>The prophesied final avatar who will appear on a white horse with a blazing sword to end the age of darkness.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== GODDESSES ===================== -->
+    <section id="goddesses" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">The Divine Feminine</h2>
+                <h3 class="heading-3d">Shakti — The Cosmic Power</h3>
+                <p class="desc">In Indian mythology, the feminine divine is not secondary but is the very power (Shakti) that animates the universe. Without Shakti, even the gods are powerless.</p>
+            </div>
+
+            <div class="goddess-grid">
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/durga.jpg" alt="Goddess Durga"><div class="gc-ring" style="--rc:#ff4444"></div></div>
+                    <h4>Durga</h4><span class="gc-title">The Invincible Warrior</span>
+                    <p>Created from the combined energies of all the gods to defeat the buffalo demon Mahishasura. She rides a lion and wields weapons gifted by each god, representing the ultimate triumph of good over evil.</p>
+                </div>
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/lakshmi.jpg" alt="Goddess Lakshmi"><div class="gc-ring" style="--rc:#ffd700"></div></div>
+                    <h4>Lakshmi</h4><span class="gc-title">Goddess of Prosperity</span>
+                    <p>Born from the churning of the cosmic ocean, seated on a lotus, she bestows wealth, fortune, and grace. As Vishnu's consort, she accompanies him in every incarnation — as Sita with Rama, as Rukmini with Krishna.</p>
+                </div>
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/saraswati.jpg" alt="Goddess Saraswati"><div class="gc-ring" style="--rc:#e0e0e0"></div></div>
+                    <h4>Saraswati</h4><span class="gc-title">Goddess of Knowledge</span>
+                    <p>Dressed in white, seated on a swan, playing the veena — she embodies wisdom, learning, music, and the arts. She represents the free flow of consciousness and is worshipped before any pursuit of knowledge.</p>
+                </div>
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/kali.jpg" alt="Goddess Kali"><div class="gc-ring" style="--rc:#8b0000"></div></div>
+                    <h4>Kali</h4><span class="gc-title">The Dark Mother</span>
+                    <p>The fierce aspect of the divine feminine, with a garland of skulls and a tongue dripping with the blood of demons. Beyond her terrifying form lies the ultimate compassionate mother who destroys ego and illusion.</p>
+                </div>
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/parvati.jpg" alt="Goddess Parvati"><div class="gc-ring" style="--rc:#4ecdc4"></div></div>
+                    <h4>Parvati</h4><span class="gc-title">The Mountain's Daughter</span>
+                    <p>Through fierce tapas (penance), she won the heart of Shiva himself. She represents devotion, fertility, and marital felicity. Mother of Ganesha and Kartikeya, she is the gentle face of Shakti.</p>
+                </div>
+                <div class="goddess-card" data-tilt>
+                    <div class="gc-img"><img src="images/ganga.jpg" alt="Goddess Ganga"><div class="gc-ring" style="--rc:#00bcd4"></div></div>
+                    <h4>Ganga</h4><span class="gc-title">The Sacred River</span>
+                    <p>The celestial river brought to earth by King Bhagiratha's penance and caught in Shiva's locks to soften her fall. She purifies all sins and grants moksha — the holy Ganges is her earthly form.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EPICS ===================== -->
+    <section id="epics" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">The Great Epics</h2>
+                <h3 class="heading-3d">Itihāsa — "Thus It Happened"</h3>
+                <p class="desc">Not merely stories — they are civilizational blueprints, philosophical treatises, and moral compasses.</p>
+            </div>
+
+            <div class="epics-row">
+                <div class="epic-card" data-tilt>
+                    <div class="ec-glow" style="--eg:#ff6b00"></div>
+                    <div class="ec-badges"><span>24,000 Verses</span><span>7 Kāṇḍas</span><span>Sage Valmiki</span></div>
+                    <h4>The Rāmāyaṇa</h4>
+                    <p class="ec-quote">"Like the sun, Rama illuminated the world with his virtues."</p>
+                    <div class="ec-chapters">
+                        <div class="ch"><span class="ch-n">I</span><div><strong>Bala Kanda</strong> — Prince Rama wins Sita by lifting and stringing the mighty bow of Lord Shiva at her Swayamvara.</div></div>
+                        <div class="ch"><span class="ch-n">II</span><div><strong>Ayodhya Kanda</strong> — On the eve of coronation, Rama is exiled for fourteen years. Sita and Lakshmana follow him.</div></div>
+                        <div class="ch"><span class="ch-n">III</span><div><strong>Aranya Kanda</strong> — Life in the Dandaka forest, encounters with sages and demons.</div></div>
+                        <div class="ch"><span class="ch-n">IV</span><div><strong>Kishkindha Kanda</strong> — After Sita's abduction, Rama allies with Hanuman and the Vanara army.</div></div>
+                        <div class="ch"><span class="ch-n">V</span><div><strong>Sundara Kanda</strong> — Hanuman leaps across the ocean, discovers Sita, and sets Lanka ablaze.</div></div>
+                        <div class="ch"><span class="ch-n">VI</span><div><strong>Yuddha Kanda</strong> — The great battle of Lanka. Rama slays Ravana and rescues Sita.</div></div>
+                    </div>
+                </div>
+
+                <div class="epic-card" data-tilt>
+                    <div class="ec-glow" style="--eg:#4a90d9"></div>
+                    <div class="ec-badges"><span>100,000 Verses</span><span>18 Parvas</span><span>Sage Vyasa</span></div>
+                    <h4>The Mahābhārata</h4>
+                    <p class="ec-quote">"What is found here may be found elsewhere. What is not found here will not be found elsewhere."</p>
+                    <div class="ec-chapters">
+                        <div class="ch"><span class="ch-n">⚔️</span><div><strong>The Conflict</strong> — Five Pandava brothers cheated out of their kingdom by 100 Kaurava cousins.</div></div>
+                        <div class="ch"><span class="ch-n">🎲</span><div><strong>Game of Dice</strong> — Yudhishthira gambles everything away; Draupadi is publicly humiliated.</div></div>
+                        <div class="ch"><span class="ch-n">🏕️</span><div><strong>The Exile</strong> — 13 years of exile, gathering allies, divine weapons, and wisdom.</div></div>
+                        <div class="ch"><span class="ch-n">🙏</span><div><strong>Bhagavad Gita</strong> — Krishna's 700 immortal verses on duty, devotion, and reality.</div></div>
+                        <div class="ch"><span class="ch-n">⚡</span><div><strong>18-Day War</strong> — Kurukshetra; Bhishma, Drona, Karna, Abhimanyu fall in devastating battle.</div></div>
+                        <div class="ch"><span class="ch-n">👑</span><div><strong>The Aftermath</strong> — Victory in ashes. The Pandavas walk toward the Himalayas and heaven.</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CREATURES ===================== -->
+    <section id="creatures" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">Mythological Beings</h2>
+                <h3 class="heading-3d">Creatures of Legend</h3>
+                <p class="desc">Indian mythology teems with extraordinary beings — divine, demonic, and everything in between.</p>
+            </div>
+            <div class="creature-grid">
+                <div class="creature-card" data-tilt><div class="cr-e">🦅</div><h5>Garuda</h5><p>King of birds, half-eagle half-man, sworn enemy of serpents. So radiant the gods mistook him for Agni.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">🐍</div><h5>Nāgas</h5><p>Powerful serpent beings. Shesha holds the universe; Vasuki was the rope during ocean churning.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">🐒</div><h5>Vanaras</h5><p>The divine monkey race. Hanuman leapt oceans, grew to cosmic size, carried a mountain.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">👹</div><h5>Rakshasas</h5><p>Shape-shifting demons of immense power. Not all evil — Vibhishana was righteous.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">🎶</div><h5>Gandharvas</h5><p>Celestial musicians who serve in Indra's court. Their music enchants all three worlds.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">💃</div><h5>Apsaras</h5><p>Celestial nymphs of breathtaking beauty — Urvashi, Menaka, Rambha, Tilottama.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">🧞</div><h5>Yakshas</h5><p>Nature spirits guarding treasures. Their king Kubera is the lord of wealth.</p></div>
+                <div class="creature-card" data-tilt><div class="cr-e">🐘</div><h5>Airavata</h5><p>The white elephant with four tusks, Indra's mount, born during the ocean churning.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== COSMOLOGY ===================== -->
+    <section id="cosmology" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">Hindu Cosmology</h2>
+                <h3 class="heading-3d">The Architecture of Existence</h3>
+                <p class="desc">A universe of staggering scale — cyclic, infinite, and layered.</p>
+            </div>
+
+            <div class="cosmo-grid">
+                <div class="cosmo-card" data-tilt>
+                    <h4>⏳ The Yugas — Cosmic Ages</h4>
+                    <div class="yuga-list">
+                        <div class="yuga-row" style="--yc:#ffd700"><div class="yuga-bar" style="width:100%"></div><span class="yuga-name">Satya Yuga</span><span class="yuga-info">1,728,000 yrs — Golden Age of Truth</span></div>
+                        <div class="yuga-row" style="--yc:#c0c0c0"><div class="yuga-bar" style="width:75%"></div><span class="yuga-name">Treta Yuga</span><span class="yuga-info">1,296,000 yrs — Age of Rama</span></div>
+                        <div class="yuga-row" style="--yc:#cd7f32"><div class="yuga-bar" style="width:50%"></div><span class="yuga-name">Dvapara Yuga</span><span class="yuga-info">864,000 yrs — Age of Krishna</span></div>
+                        <div class="yuga-row" style="--yc:#888"><div class="yuga-bar" style="width:25%"></div><span class="yuga-name">Kali Yuga</span><span class="yuga-info">432,000 yrs — We are here ⬤</span></div>
+                    </div>
+                </div>
+
+                <div class="cosmo-card" data-tilt>
+                    <h4>🌍 The 14 Lokas (Realms)</h4>
+                    <div class="loka-stack">
+                        <div class="loka-item up">Satyaloka — Brahma</div>
+                        <div class="loka-item up">Tapoloka — Penance</div>
+                        <div class="loka-item up">Janaloka — Saints</div>
+                        <div class="loka-item up">Maharloka — Great Ones</div>
+                        <div class="loka-item up">Svargaloka — Heaven</div>
+                        <div class="loka-item up">Bhuvarloka — Atmosphere</div>
+                        <div class="loka-item here">🌏 Bhuloka — Earth (We are here)</div>
+                        <div class="loka-item down">Atala</div>
+                        <div class="loka-item down">Vitala</div>
+                        <div class="loka-item down">Sutala — King Bali</div>
+                        <div class="loka-item down">Talatala</div>
+                        <div class="loka-item down">Mahatala — Nagas</div>
+                        <div class="loka-item down">Rasatala</div>
+                        <div class="loka-item down">Patala — Deepest Realm</div>
+                    </div>
+                </div>
+
+                <div class="cosmo-card wide" data-tilt>
+                    <h4>♾️ The Scale of Cosmic Time</h4>
+                    <div class="time-flow">
+                        <div class="tf-node"><span class="tf-v">4.32M yrs</span><span class="tf-n">1 Mahayuga</span><span class="tf-d">One cycle of four Yugas</span></div>
+                        <div class="tf-arrow">→</div>
+                        <div class="tf-node"><span class="tf-v">4.32B yrs</span><span class="tf-n">1 Kalpa</span><span class="tf-d">One day of Brahma</span></div>
+                        <div class="tf-arrow">→</div>
+                        <div class="tf-node"><span class="tf-v">8.64B yrs</span><span class="tf-n">Day + Night</span><span class="tf-d">Full Brahma day-night cycle</span></div>
+                        <div class="tf-arrow">→</div>
+                        <div class="tf-node"><span class="tf-v">311T yrs</span><span class="tf-n">Life of Brahma</span><span class="tf-d">100 Brahma years, then rebirth</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SACRED TEXTS ===================== -->
+    <section id="texts" class="scene-section">
+        <div class="container">
+            <div class="section-header reveal-3d">
+                <h2 class="label">Sacred Literature</h2>
+                <h3 class="heading-3d">Texts That Shaped a Civilization</h3>
+            </div>
+
+            <div class="texts-grid">
+                <div class="text-card" data-tilt>
+                    <div class="tc-badge shruti">Shruti — "That which is heard"</div>
+                    <h4>The Vedas</h4>
+                    <p>The oldest scriptures, eternal and authorless — revealed to sages in deep meditation:</p>
+                    <ul><li><strong>Rig Veda</strong> — Hymns of praise (~1500 BCE)</li><li><strong>Yajur Veda</strong> — Ritual formulas</li><li><strong>Sama Veda</strong> — Musical chants</li><li><strong>Atharva Veda</strong> — Spells & incantations</li></ul>
+                </div>
+                <div class="text-card" data-tilt>
+                    <div class="tc-badge shruti">Shruti</div>
+                    <h4>The Upanishads</h4>
+                    <p>The philosophical crown jewels — exploring Brahman (ultimate reality), Atman (self), karma, and moksha.</p>
+                    <blockquote>"Tat Tvam Asi" — Thou Art That<br><cite>— Chandogya Upanishad</cite></blockquote>
+                </div>
+                <div class="text-card" data-tilt>
+                    <div class="tc-badge smriti">Smriti — "That which is remembered"</div>
+                    <h4>The Puranas</h4>
+                    <p>18 major texts containing stories of gods, creation, genealogies of kings, and cycles of cosmic time. They made Vedic philosophy accessible to all through narrative.</p>
+                </div>
+                <div class="text-card" data-tilt>
+                    <div class="tc-badge smriti">Smriti</div>
+                    <h4>The Bhagavad Gita</h4>
+                    <p>700 verses where Krishna reveals the nature of reality, duty, and paths to liberation.</p>
+                    <blockquote>"You have the right to work, but never to the fruit of work."<br><cite>— Chapter 2, Verse 47</cite></blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== QUOTE BANNER ===================== -->
+    <section class="scene-section quote-sec">
+        <div class="container">
+            <div class="quote-3d" data-tilt>
+                <div class="q-mark">"</div>
+                <p>In the beginning there was neither existence nor non-existence. There was no atmosphere, no sky beyond. What moved? In whose keeping? Was there water, the deep abyss?</p>
+                <cite>— Nasadiya Sukta, Rig Veda (Hymn of Creation, ~1500 BCE)</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-brand">
+                    <h4>🕉 Sanatan Katha</h4>
+                    <p>A tribute to the timeless stories, profound philosophy, and divine beings of Indian mythology. These narratives have guided humanity for millennia.</p>
+                </div>
+                <div class="footer-links">
+                    <h5>Explore</h5>
+                    <a href="#trimurti">The Trimurti</a>
+                    <a href="#dashavatar">Dashavatar</a>
+                    <a href="#goddesses">Divine Feminine</a>
+                    <a href="#epics">Great Epics</a>
+                    <a href="#cosmology">Cosmology</a>
+                    <a href="#texts">Sacred Texts</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>॥ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥</p>
+                <p class="ft-sub">"May all beings be happy. May all beings be free from illness."</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
